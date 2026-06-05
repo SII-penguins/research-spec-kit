@@ -1,0 +1,7 @@
+interface:
+  display_name: "研究八件套"
+  short_description: "Interrogate algorithm ideas before specs"
+  default_prompt: "Use $research-spec-kit to turn my algorithm research idea into a rigorous reproducible project documentation set."
+
+policy:
+  allow_implicit_invocation: true
