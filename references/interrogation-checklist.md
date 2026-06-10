@@ -84,6 +84,16 @@ Use this checklist before creating, migrating, or substantially updating a compl
 - What files or subsystems must not be touched concurrently?
 - What handoff template is required?
 - What are the GPU/CPU/cloud/local resource boundaries?
+- Who is the only user-facing project-content interface?
+- Is leader allowed to edit production code/tests, or is leader coordination-only?
+- Which roles are stable resident roles, and which are elastic short-task workers?
+- What concurrency tiers are allowed for daily, heavy, and burst work?
+- What no-overlap declaration fields are mandatory before parallel assignments?
+- What does permission approval authorize, and what does it explicitly not authorize?
+- When should reviewer remain read-only, and what evidence must reviewer check before completion?
+- What stale team state must be normalized before the next staged task?
+- What claim types need distinct verification thresholds?
+- When should work not be split even if extra agents are available?
 
 ## Algorithm/Experiment Specifics
 

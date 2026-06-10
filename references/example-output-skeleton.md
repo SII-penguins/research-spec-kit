@@ -191,7 +191,7 @@ Canonical For: roadmap, phase history, exit criteria
 
 ## Stable Contract Docs
 
-Use the same header pattern for `doc/PRD.md`, `doc/FRONTEND_GUIDELINES.md`, `doc/BACKEND_STRUCTURE.md`, `doc/APP_FLOW.md`, and `doc/TEAM.md`:
+Use the same header pattern for `doc/PRD.md`, `doc/FRONTEND_GUIDELINES.md`, `doc/BACKEND_STRUCTURE.md`, and `doc/APP_FLOW.md`:
 
 ~~~markdown
 # <DOCUMENT_NAME>
@@ -223,4 +223,133 @@ Mistake:
 Cause:
 Correction:
 Future rule:
+~~~
+
+## `doc/TEAM.md`
+
+~~~markdown
+# TEAM.md
+
+Status: Active
+Canonical For: Agent team coordination, role boundaries, concurrency limits, permission routing, no-overlap declarations, and evidence handoff.
+
+## 1. Purpose
+
+Define how humans and agents collaborate on this project without duplicating state or creating hidden scope changes.
+
+## 2. Non-negotiable rules
+
+1. User-facing project content goes through `leader`.
+2. `leader` coordinates, assigns, integrates, reports, and updates canonical docs.
+3. Implementation lanes own bounded edit contexts.
+4. Reviewer is read-only unless explicitly reassigned.
+5. Parallel work requires a no-overlap declaration.
+6. Permission approval is execution authorization, not scope approval.
+7. Durable facts go to canonical docs, not team chat or scratch logs.
+
+## 3. Roles
+
+| Role | Responsibility | User-facing? | Boundary |
+| --- | --- | --- | --- |
+| leader | Coordinate, assign, integrate, report | yes | Not default production-code owner |
+| implementer | Assigned implementation context | no | Assigned files/modules only |
+| reviewer | Independent verification | no | Read-only by default |
+| elastic worker | Bounded short task | no | Short-lived and subordinate to stable owner |
+
+## 4. Communication rule
+
+- User <-> leader <-> agents.
+- Direct agent alignment is technical only and must be summarized to leader.
+- Non-leader agents do not make project-content decisions.
+
+## 5. Concurrency tiers
+
+| Tier | Active workers | Use case | Guardrail |
+| --- | ---: | --- | --- |
+| Default | 1-4 | Normal implementation and focused review | One edit owner plus reviewer |
+| Heavy | 5-8 | Independent modules/tests/docs/artifacts | No-overlap declaration required |
+| Burst | 10-20 | Short read-only sweeps/log triage/inventory | Timeout/backoff/retry cap; mostly read-only |
+
+## 6. No-overlap declaration
+
+```text
+Context boundary:
+Concurrency tier:
+Active roles:
+Each role may edit:
+Each role may inspect:
+Reviewer may inspect/run:
+Nobody may touch:
+Canonical docs to read:
+Allowed commands/resources:
+Stop conditions:
+Handoff required:
+```
+
+## 7. Role protocols
+
+- Leader:
+- Implementer:
+- Reviewer:
+
+## 8. Permission behavior
+
+Permission prompts authorize execution only inside the assigned boundary. They do not authorize new scope, new runs, destructive actions, dependency changes, or positive claims.
+
+## 9. Documentation ownership
+
+Leader promotes durable facts into canonical owner docs. Team chat, panes, transcripts, and scratch notes are transient.
+
+## 10. Handoff templates
+
+Researcher / implementer handoff:
+
+```text
+Assignment:
+Files changed:
+Behavior changed:
+Verification commands:
+Verification results:
+Not run and why:
+Risks/blockers:
+Suggested doc updates:
+Next suggested action:
+```
+
+Reviewer handoff:
+
+```text
+Claims reviewed:
+Files inspected:
+Commands run:
+Pass/fail by claim:
+Blocking issues:
+Missing evidence:
+Suggested doc updates:
+Next suggested action:
+```
+
+Leader finalization:
+
+```text
+Accepted changes:
+Evidence accepted:
+Disagreements or unresolved risks:
+Canonical docs updated/to update:
+Transient context not promoted:
+Next action:
+User-facing summary:
+```
+
+## 11. When not to split
+
+- Same file/function.
+- Same evolving failure mode.
+- Reviewer would need to rediscover the whole implementation context.
+- Mostly wording/bikeshedding.
+- Architecture/contracts are still changing.
+
+## 12. Completion standard
+
+Complete only when owner finished or stopped, reviewer evidence matches the claim, blockers are documented, and canonical docs are updated when needed.
 ~~~

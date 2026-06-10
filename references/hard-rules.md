@@ -75,6 +75,19 @@ Update the owner document when the fact changes:
 - Do not expand the task queue with nice-to-have work unless it supports the current phase or claim.
 - If a task uncovers a semantic/evidence blocker, stop and route to diagnostics instead of burying the issue in TODO text.
 
+## Team Rules
+
+- User-facing project content must flow through the designated `leader` when a team model is active.
+- `leader` coordinates, assigns, integrates, reports, and updates canonical docs; it does not become the default production-code owner once implementation lanes are active.
+- Split work by context boundary, file ownership, and mental model, not by desire to use more agents.
+- Parallel work requires a no-overlap declaration before assignment.
+- Reviewer is read-only by default. Reviewer may challenge claims and request evidence, but must not implement fixes unless explicitly reassigned.
+- Direct cross-agent coordination is a technical fast path, not a project-decision path. It must not expand scope, change architecture/contracts, authorize new files, approve risky verification, or decide final completion.
+- User approval of a tool permission prompt is execution authorization only. It is not scope approval, claim approval, new-run approval, dependency approval, or permission to mutate shared state beyond the assignment boundary.
+- No stale teammate, stale task owner, stale pane, stale inbox, or old assignment may block progress. Normalize or recreate the team before the next staged task.
+- Do not create long-lived `TEAM_LOG.md`, `AGENT_LOG.md`, or `SCRATCH.md` as alternate memory. Promote durable facts into canonical docs and discard or archive temporary coordination notes.
+- Do not split work when agents would edit the same file/function, infer the same evolving failure mode, or force the reviewer to rediscover the whole implementation context.
+
 ## Research/Experiment Rules
 
 Use these when the project includes algorithm research, benchmarks, model training, or experiments:
@@ -98,3 +111,4 @@ Before handing off generated or migrated docs, verify:
 - Long failures are in `doc/diagnostics/*.md` when needed.
 - Stable contracts do not contain live status pollution.
 - Changed facts were updated only in their owner documents.
+- Active team work, if any, has a leader-routed handoff and no unresolved owner overlap.

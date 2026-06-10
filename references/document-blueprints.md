@@ -262,26 +262,31 @@ Required sections:
 
 ## `doc/TEAM.md` - Multi-Agent Collaboration Protocol
 
-Canonical for: team roles, multi-agent workflow, concurrency, handoff, permissions, no-overlap rules.
+Canonical for: team roles, user-facing communication routing, context boundaries, concurrency limits, permission routing, no-overlap declarations, evidence handoff, and multi-agent completion standards.
 
 Update frequency: medium.
 
-Must not own: project state, root history, claims, math interface.
+Must not own: project state, root history, claims, math interface, run facts, or a long-lived team log.
+
+Read `references/team-blueprint.md` before drafting a serious `TEAM.md`.
 
 Required sections:
 
 - `Status` and `Canonical For`
 - `1. Purpose`
-- `2. Roles`
-- `3. Communication rule`
-- `4. Concurrency tiers`
-- `5. No-overlap declaration`
-- `6. Leader protocol`
-- `7. Researcher / implementer protocol`
-- `8. Reviewer protocol`
-- `9. Documentation update ownership`
-- `10. Handoff templates`
-- `11. Completion standard`
+- `2. Operating model`: leader, implementation/research lanes, reviewer, optional elastic workers.
+- `3. Communication rule`: user-facing project content flows through leader; direct cross-agent alignment is technical only.
+- `4. Concurrency tiers`: default, heavy, and burst limits with rules for when each is allowed.
+- `5. Context-boundary first rule`: split by ownership and mental model, not by role title.
+- `6. No-overlap declaration`: required fields before parallel work.
+- `7. Role protocols`: leader coordinates; implementation lanes edit; reviewer is read-only by default.
+- `8. Permission behavior`: permission approval is execution authorization, not scope approval.
+- `9. Documentation update ownership`: team messages are transient; stable facts go to canonical docs.
+- `10. Structured handoffs`: researcher, reviewer, and leader finalization templates.
+- `11. Long-running continuity`: normalization before the next staged task and after resume.
+- `12. Verification thresholds by claim type`
+- `13. When not to split`
+- `14. Completion standard`
 
 ## `lessons.md` - Real Mistakes and Corrections
 

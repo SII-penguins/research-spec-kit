@@ -52,5 +52,6 @@ Every generated or updated document must state its canonical responsibility. Eve
 
 - `references/interrogation-checklist.md`: question bank for project setup, migration, and research scoping.
 - `references/document-blueprints.md`: required responsibilities and sections for the canonical document set.
+- `references/team-blueprint.md`: concise rules for building `doc/TEAM.md` from a heavy multi-agent example.
 - `references/hard-rules.md`: conflict priority, update protocol, and forbidden shortcuts.
 - `references/example-output-skeleton.md`: compact scaffold for the output files.
