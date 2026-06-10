@@ -1,6 +1,6 @@
 ---
 name: research-spec-kit
-description: Create and maintain canonical specification documents for complex AI-assisted projects, algorithm research, experiments, and multi-agent engineering work. Use when the user wants a repo documentation system with CLAUDE.md, PROGRESS.md, TODO.md, doc/IMPLEMENTATION_PLAN.md, doc/RUN_REGISTRY.md, diagnostics, PRD, FRONTEND_GUIDELINES, BACKEND_STRUCTURE, APP_FLOW, TEAM.md, lessons.md, canonical owners, conflict priority, update protocols, run ledgers, evidence gates, or assumption interrogation before coding.
+description: Create and maintain canonical specification documents for complex AI-assisted projects, algorithm research, experiments, and multi-agent engineering work. Use when the user wants a repo documentation system with AGENTS.md, PROGRESS.md, TODO.md, doc/IMPLEMENTATION_PLAN.md, doc/RUN_REGISTRY.md, diagnostics, PRD, FRONTEND_GUIDELINES, BACKEND_STRUCTURE, APP_FLOW, TEAM.md, lessons.md, canonical owners, conflict priority, update protocols, run ledgers, evidence gates, or assumption interrogation before coding.
 ---
 
 # Research Spec Kit
@@ -27,7 +27,7 @@ Before writing non-trivial code, experiments, reports, or project docs, identify
 
 Generate or update this structure unless the user specifies a smaller scope:
 
-- `CLAUDE.md`
+- `AGENTS.md`
 - `PROGRESS.md`
 - `TODO.md`
 - `doc/IMPLEMENTATION_PLAN.md`
