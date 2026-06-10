@@ -1,11 +1,11 @@
 ---
-name: research-spec-kit
-description: Create and maintain canonical specification documents for complex AI-assisted projects, algorithm research, experiments, and multi-agent engineering work. Use when the user wants a repo documentation system with AGENTS.md, PROGRESS.md, TODO.md, doc/IMPLEMENTATION_PLAN.md, doc/RUN_REGISTRY.md, diagnostics, PRD, FRONTEND_GUIDELINES, BACKEND_STRUCTURE, APP_FLOW, TEAM.md, lessons.md, canonical owners, conflict priority, update protocols, run ledgers, evidence gates, or assumption interrogation before coding.
+name: project-os
+description: ProjectOS creates and maintains canonical specification documents for complex AI-assisted projects, algorithm research, experiments, and multi-agent engineering work. Use when the user wants a repo documentation system with AGENTS.md, PROGRESS.md, TODO.md, doc/IMPLEMENTATION_PLAN.md, doc/RUN_REGISTRY.md, diagnostics, PRD, FRONTEND_GUIDELINES, BACKEND_STRUCTURE, APP_FLOW, TEAM.md, lessons.md, canonical owners, conflict priority, update protocols, run ledgers, evidence gates, or assumption interrogation before coding.
 ---
 
-# Research Spec Kit
+# ProjectOS
 
-Use this skill to turn a complex project idea into a maintainable AI collaboration documentation system. The current Chinese working name is "复杂项目文档中枢"; the earlier "研究八件套" remains a useful alias for algorithm/research projects.
+Use this skill to turn a complex project idea into a maintainable AI collaboration documentation system. ProjectOS gives agents a project operating system: one canonical owner for every fact, one live-state source, one task queue, one run ledger, one roadmap, one team protocol.
 
 ## Core Rule
 

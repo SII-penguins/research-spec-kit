@@ -1,7 +1,7 @@
 interface:
-  display_name: "复杂项目文档中枢"
-  short_description: "Canonical docs for complex AI projects"
-  default_prompt: "Use $research-spec-kit to design a canonical documentation system for my complex AI-assisted project."
+  display_name: "ProjectOS"
+  short_description: "Project operating system for agents"
+  default_prompt: "Use $project-os to design a canonical documentation system for my complex AI-assisted project."
 
 policy:
   allow_implicit_invocation: true
