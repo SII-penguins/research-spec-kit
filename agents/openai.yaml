@@ -1,7 +1,7 @@
 interface:
-  display_name: "研究八件套"
-  short_description: "Interrogate algorithm ideas before specs"
-  default_prompt: "Use $research-spec-kit to turn my algorithm research idea into a rigorous reproducible project documentation set."
+  display_name: "复杂项目文档中枢"
+  short_description: "Canonical docs for complex AI projects"
+  default_prompt: "Use $research-spec-kit to design a canonical documentation system for my complex AI-assisted project."
 
 policy:
   allow_implicit_invocation: true

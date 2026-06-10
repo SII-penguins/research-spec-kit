@@ -1,68 +1,100 @@
 # Hard Rules
 
-Apply these rules before drafting docs, writing code, running experiments, or summarizing results.
+Apply these rules before drafting docs, writing code, running experiments, reviewing evidence, or summarizing project status.
+
+## One Fact, One Owner
+
+- Every project fact must have exactly one canonical owner.
+- Other documents may link or summarize, but must not copy the full state, task queue, run history, diagnostic analysis, or contract.
+- If two docs conflict, do not average them. Use the conflict priority below.
+- If a fact has no owner, assign one before creating or updating it.
+
+## Conflict Priority
+
+Use this priority whenever documents disagree:
+
+- `PROGRESS.md` wins for current live state.
+- `TODO.md` wins for current task order.
+- `doc/RUN_REGISTRY.md` wins for factual run/root/parser/table history.
+- `doc/IMPLEMENTATION_PLAN.md` wins for roadmap and phase interpretation.
+- `doc/PRD.md` wins for product/research claim narrative.
+- `doc/FRONTEND_GUIDELINES.md` wins for math/interface/result presentation definitions.
+- `doc/BACKEND_STRUCTURE.md` wins for schema/evidence/parser/accounting/runtime contracts.
+- `doc/APP_FLOW.md` wins for runtime sequence.
+- `doc/TEAM.md` wins for agent coordination.
+- `CLAUDE.md` wins for document reading order and AI behavior rules.
+- `lessons.md` wins only for recorded mistakes and remediation.
+
+## Update Protocol
+
+Update the owner document when the fact changes:
+
+| Event | Must update |
+| --- | --- |
+| Current blocker or next action changes | `PROGRESS.md`, `TODO.md` |
+| Code module completed | `PROGRESS.md`, `TODO.md`; if phase meaning changes, `doc/IMPLEMENTATION_PLAN.md` |
+| Root/run starts | `PROGRESS.md`, `doc/RUN_REGISTRY.md` |
+| Root/run terminates | `PROGRESS.md`, `doc/RUN_REGISTRY.md`; diagnostics if needed |
+| Reviewer accounting completes | `PROGRESS.md`, `doc/RUN_REGISTRY.md`, `TODO.md`; diagnostics on failure |
+| Parser runs | `PROGRESS.md`, `doc/RUN_REGISTRY.md`, `TODO.md` |
+| CSV/table/figure/report generated | `PROGRESS.md`, `doc/RUN_REGISTRY.md`, `TODO.md`; roadmap if phase gate changes |
+| Stage changes | `PROGRESS.md`, `TODO.md`, `doc/IMPLEMENTATION_PLAN.md` |
+| Stable contract changes | Relevant `PRD` / `FRONTEND_GUIDELINES` / `BACKEND_STRUCTURE` / `APP_FLOW` doc |
+| Real mistake is found | `lessons.md` |
+| Multi-agent workflow changes | `doc/TEAM.md` |
 
 ## Do Not Guess
 
-- Do not assume the research problem, claim, data, baseline, metric, compute budget, or conclusion boundary.
+- Do not assume project state, claim, data, baseline, metric, compute budget, task order, or conclusion boundary.
 - Mark unresolved items as `待确认项`.
-- Ask follow-up questions before creating final docs when a missing assumption changes project direction.
+- Ask follow-up questions only when the missing answer changes an irreversible or high-cost decision.
 
-## Bind Claims to Evidence
+## Keep Docs Narrow
 
-- Every claim must map to at least one required experiment.
-- Every required experiment must define inputs, config, metrics, artifacts, and acceptance criteria.
-- Every result statement must cite an artifact path.
+- `CLAUDE.md` is an entrypoint, not a project encyclopedia.
+- `PROGRESS.md` is live state, not a historical log.
+- `TODO.md` is the active queue, not progress history.
+- `IMPLEMENTATION_PLAN.md` is roadmap, not today's command list.
+- `RUN_REGISTRY.md` is a factual ledger, not long diagnosis.
+- Diagnostics are long analysis, not live state.
+- Stable contracts must not absorb current blockers or stale TODOs.
+
+## Evidence and Claim Rules
+
+- Every claim must map to evidence, experiment, validation, or acceptance criteria.
+- Every run/result statement must cite an artifact path or state that no artifact exists.
+- Do not treat smoke outputs as formal results.
+- Every run must have a trust level.
+- Parser/formal result eligibility must be explicit when relevant.
 - Do not write conclusions without generated artifacts.
 
-## Define Baselines Precisely
+## Task Rules
 
-- Do not write "baseline" without names.
-- For each baseline, define config, data, budget, seed, preprocessing, training/inference mode, output artifact, and fairness control.
-- Compare methods under shared evaluation code unless the user explicitly accepts a different protocol.
+- Every active task must have an owner, dependency status, acceptance gate, and forbidden actions.
+- Do not resurrect old TODOs without checking `PROGRESS.md`.
+- Do not expand the task queue with nice-to-have work unless it supports the current phase or claim.
+- If a task uncovers a semantic/evidence blocker, stop and route to diagnostics instead of burying the issue in TODO text.
 
-## Define Evaluation Precisely
+## Research/Experiment Rules
 
-- Do not write "evaluate" without metrics.
-- Define metric formula or exact computation process.
-- Define aggregation across samples, seeds, folds, datasets, and scenarios.
-- Define whether higher or lower is better.
-- Define table/figure names and artifact paths.
+Use these when the project includes algorithm research, benchmarks, model training, or experiments:
 
-## Define Training Precisely
-
+- Do not write "baseline" without names, configs, fairness controls, and output artifacts.
+- Do not write "evaluate" without metrics, formulas/procedures, aggregation, directionality, and artifact paths.
 - Do not write "train model" without model, data, loss, optimizer, scheduler, seed, batch size, epoch/step budget, checkpoint rules, and failure handling.
 - Put model names, paths, thresholds, weights, budgets, random seeds, batch sizes, and learning rates in config.
-- Do not hardcode experiment settings in source code.
-
-## Separate Run Modes
-
-- Label `smoke`, `dev`, `report`, and `full` modes explicitly.
-- Do not treat smoke-test outputs as formal results.
-- Require no-skip gates before scaling experiments.
-
-## Preserve Reproducibility
-
-- Notebook work is allowed only for exploration, visualization, or failure analysis.
-- Notebook output cannot be the only reproduction path.
-- Use CLI commands, config groups, and artifact paths as the reproducible interface.
-- Track progress in `progress.txt`, not conversation memory.
-
-## Control Scope
-
-- Do not add dependencies to look sophisticated.
-- Do not expand experiments unless they support a claim.
-- Do not invent directory structures, filenames, or module boundaries after `BACKEND_STRUCTURE.md` exists.
-- Do not claim generalization to datasets, domains, users, or deployment settings outside the agreed scope.
+- Keep `smoke`, `dev`, `report`, and `full` modes explicitly separate.
+- Notebook work is allowed for exploration, visualization, and failure analysis, not as the only reproduction path.
 
 ## Final Review Gate
 
-Before handing off generated docs, verify:
+Before handing off generated or migrated docs, verify:
 
-- All eight files exist or are explicitly planned.
-- Critical unknowns are marked as `待确认项`.
-- Each module has input, output, responsibility, and acceptance criteria.
-- Each experiment serves a claim.
-- Each metric has computation and aggregation rules.
-- Each result path is an artifact path, not a prose promise.
-- `progress.txt` names current status, next action, trusted results, smoke-only results, failures, and open questions.
+- Each file states `Canonical For`.
+- The read order and conflict priority are present.
+- Current state appears in `PROGRESS.md`, not scattered through docs.
+- Active tasks appear in `TODO.md`, not scattered through docs.
+- Runs/results appear in `RUN_REGISTRY.md` with trust levels.
+- Long failures are in `doc/diagnostics/*.md` when needed.
+- Stable contracts do not contain live status pollution.
+- Changed facts were updated only in their owner documents.

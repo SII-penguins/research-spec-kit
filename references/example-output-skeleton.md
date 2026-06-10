@@ -1,210 +1,226 @@
 # Example Output Skeleton
 
-Use this as a compact scaffold only. Replace placeholders with user-confirmed project details. Do not invent algorithm-specific content.
-
-## `PRD.md`
-
-~~~markdown
-# PRD
-
-## 研究问题定义
-
-- Problem:
-- Motivation:
-- Target user:
-- Boundary:
-- 待确认项:
-
-## 任务输入与输出
-
-- Input:
-- Output:
-- Valid examples:
-- Invalid examples:
-
-## 核心 Claim
-
-| Claim | Required experiment | Primary metric | Artifact |
-| --- | --- | --- | --- |
-| 待确认 | 待确认 | 待确认 | 待确认 |
-
-## 成功标准
-
-- Metric gate:
-- Artifact gate:
-- Reproducibility gate:
-
-## Out of Scope
-
-- 待确认
-~~~
-
-## `APP_FLOW.md`
-
-~~~markdown
-# APP_FLOW
-
-## Top-Level Pipeline
-
-1. Ingest data:
-2. Validate data:
-3. Build splits:
-4. Train baselines:
-5. Train proposed method:
-6. Run inference:
-7. Evaluate:
-8. Aggregate artifacts:
-9. Generate report:
-
-## Flow Template
-
-| Flow | Trigger | Input | Output | Success | Error State | Artifact |
-| --- | --- | --- | --- | --- | --- | --- |
-| 待确认 | 待确认 | 待确认 | 待确认 | 待确认 | 待确认 | 待确认 |
-~~~
-
-## `TECH_STACK.md`
-
-~~~markdown
-# TECH_STACK
-
-## Runtime
-
-- Language:
-- Python version:
-- CUDA / driver:
-- Hardware:
-
-## Packages
-
-| Package | Version | Purpose | Change rule |
-| --- | --- | --- | --- |
-| 待确认 | 待确认 | 待确认 | 待确认 |
-
-## Smoke Test
-
-```bash
-# 待确认
-```
-~~~
-
-## `FRONTEND_GUIDELINES.md`
-
-~~~markdown
-# FRONTEND_GUIDELINES
-
-## Main Result Table
-
-| Column | Meaning | Source artifact |
-| --- | --- | --- |
-| Method | Canonical method name | config |
-| 待确认 | 待确认 | 待确认 |
-
-## Figure Rules
-
-- Line chart:
-- Bar chart:
-- Box plot:
-- Scatter plot:
-- Heatmap:
-~~~
-
-## `BACKEND_STRUCTURE.md`
-
-~~~markdown
-# BACKEND_STRUCTURE
-
-## Repository Layout
-
-```text
-project/
-  configs/
-  data/
-    raw/
-    interim/
-    processed/
-    splits/
-  src/
-  tests/
-  artifacts/
-```
-
-## Schema Template
-
-| Schema | Field | Type | Required | Meaning |
-| --- | --- | --- | --- | --- |
-| raw_record | 待确认 | 待确认 | 待确认 | 待确认 |
-~~~
-
-## `IMPLEMENTATION_PLAN.md`
-
-~~~markdown
-# IMPLEMENTATION_PLAN
-
-## Milestone 1: Project Skeleton
-
-| Task | Input | Output | Files | Command | Acceptance |
-| --- | --- | --- | --- | --- | --- |
-| 1.1 | 待确认 | 待确认 | 待确认 | 待确认 | 待确认 |
-
-## No-Skip Gates
-
-- Gate 1:
-- Gate 2:
-~~~
+Use this as a compact scaffold only. Replace placeholders with user-confirmed project details. Do not invent project-specific state.
 
 ## `CLAUDE.md`
 
 ~~~markdown
 # CLAUDE.md
 
-## Must Read First
+Status: Active
+Canonical For: AI operating rules and document routing
 
-1. progress.txt
-2. PRD.md
-3. APP_FLOW.md
-4. TECH_STACK.md
-5. BACKEND_STRUCTURE.md
-6. IMPLEMENTATION_PLAN.md
-7. FRONTEND_GUIDELINES.md
+## Purpose
+This is the first entrypoint for AI work in this repo.
 
-## Non-Negotiable Rules
+## Minimal doc map
+- Live state / session bootstrap: `PROGRESS.md`
+- Active task queue: `TODO.md`
+- Run / experiment / parser ledger: `doc/RUN_REGISTRY.md`
+- Roadmap / phase history / exit criteria: `doc/IMPLEMENTATION_PLAN.md`
+- Product / claim / scope: `doc/PRD.md`
+- Math / interface / result presentation: `doc/FRONTEND_GUIDELINES.md`
+- Backend / evidence / schema: `doc/BACKEND_STRUCTURE.md`
+- Runtime flow: `doc/APP_FLOW.md`
+- Team coordination: `doc/TEAM.md`
+- Mistakes: `lessons.md`
 
-- Do not guess unresolved research assumptions.
-- Do not claim results without artifact paths.
-- Do not treat smoke tests as formal results.
+## Read order
+1. Read `PROGRESS.md` first before non-trivial work.
+2. Read `TODO.md` for current queue.
+3. Read `doc/RUN_REGISTRY.md` when runs/results are involved.
+4. Read `doc/IMPLEMENTATION_PLAN.md` when roadmap/phase decisions are involved.
+5. Read stable contract docs only as needed.
+
+## Conflict rule
+- `PROGRESS.md` wins for current live state.
+- `TODO.md` wins for current task order.
+- `doc/RUN_REGISTRY.md` wins for run facts.
+- `doc/IMPLEMENTATION_PLAN.md` wins for roadmap interpretation.
+- Stable contract docs win for their declared contracts.
+
+## Documentation ownership
+Update the document that owns the changed fact.
+
+## Completion standard
+Do not claim completion until code/tests/artifacts are verified and owner docs are updated.
 ~~~
 
-## `progress.txt`
+## `PROGRESS.md`
 
-~~~text
-Current Status
-- 待确认
+~~~markdown
+# PROGRESS.md
 
-Completed
-- None yet.
+Status: Active
+Last Updated: 待确认
+Canonical For: live project state, next action, session bootstrap
 
-In Progress
-- Specification drafting.
+## 0. Read-first rule
+Every non-trivial session must read this file first.
 
-Next Actions
-1. Resolve open questions.
+## 1. Current phase
+- Phase: 待确认
+- Meaning: 待确认
 
-Experiments Run
-- None yet.
+## 2. Current live status
+- Current blocker: 待确认
+- Current allowed next action: 待确认
+- Current forbidden actions: 待确认
+- Stop-loss: 待确认
 
-Trusted Results
-- None yet.
+## 3. Current artifacts / roots / outputs
+| Item | Path | Status | Notes |
+| --- | --- | --- | --- |
+| 待确认 | 待确认 | 待确认 | 待确认 |
 
-Smoke Only Results
-- None yet.
+## 4. Evidence trust summary
+- Formal / parser-backed:
+- Diagnostic only:
+- Smoke only:
+- Untrusted:
 
-Failures
-- None yet.
+## 5. Active next queue summary
+See `TODO.md`; summary: 待确认
 
-Open Questions
-- 待确认
+## 6. Update protocol
+Update this file whenever live state, blocker, next action, trusted evidence, or active artifact path changes.
+~~~
 
-Last Updated
-- 待确认
+## `TODO.md`
+
+~~~markdown
+# TODO.md
+
+Status: Active
+Canonical For: active task queue and task claiming
+
+## 1. Operating rule
+Claim the first unblocked task unless the user redirects.
+
+## 2. Current active queue
+| ID | Status | Owner | Scope | Dependencies | Acceptance | Forbidden |
+| --- | --- | --- | --- | --- | --- | --- |
+| T-001 | Pending | 待确认 | 待确认 | 待确认 | 待确认 | 待确认 |
+
+## 3. Task-claiming minimum checks
+- Read `PROGRESS.md`.
+- Confirm task is unblocked.
+- Confirm no owner overlap.
+
+## 4. Hard stop conditions
+- Contract conflict.
+- Missing artifact required for a claim.
+- Semantic/evidence blocker.
+
+## 5. Handoff template
+- Completed:
+- Evidence:
+- Docs updated:
+- Next:
+
+## 6. Archive note
+Completed historical tasks should be archived outside this active queue.
+~~~
+
+## `doc/RUN_REGISTRY.md`
+
+~~~markdown
+# RUN_REGISTRY.md
+
+Status: Active
+Canonical For: experiment/run/result factual ledger
+
+## 1. Purpose
+This file records run facts only. Long analysis belongs in `doc/diagnostics/`.
+
+## 2. Trust levels
+| Trust level | Meaning |
+| --- | --- |
+| implementation_smoke | Pipeline/import/minimal behavior only; not formal evidence. |
+| diagnostic_probe | Run performed to inspect a failure or hypothesis. |
+| parser_produced_formal_result | Parser generated formal aggregate artifacts. |
+
+## 3. Run registry
+| Date | ID | Commit | Output | Scope | Status | Trust | Eligible? | Blocker | Report |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 待确认 | 待确认 | 待确认 | 待确认 | 待确认 | 待确认 | 待确认 | 待确认 | 待确认 | 待确认 |
+
+## 4. Generated artifacts
+| Artifact | Source run | Trust | Path |
+| --- | --- | --- | --- |
+
+## 5. Update rule
+Append or update rows when runs start, terminate, fail, parse, or become claim-eligible.
+~~~
+
+## `doc/IMPLEMENTATION_PLAN.md`
+
+~~~markdown
+# IMPLEMENTATION_PLAN.md
+
+Status: Active
+Canonical For: roadmap, phase history, exit criteria
+
+## 0. Master roadmap
+| Stage | Goal | Entry | Exit | Artifacts | Boundary | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| S0 | 待确认 | 待确认 | 待确认 | 待确认 | 待确认 | 待确认 |
+
+## 1. Current roadmap position
+待确认
+
+## 2. Phase history
+待确认
+
+## 3. Accepted gates
+待确认
+
+## 4. Current high-level blockers
+待确认
+
+## 5. Exit criteria
+待确认
+
+## 6. Stop-loss / fallback
+待确认
+
+## 7. Archive index
+- Run ledger: `doc/RUN_REGISTRY.md`
+- Diagnostics: `doc/diagnostics/`
+~~~
+
+## Stable Contract Docs
+
+Use the same header pattern for `doc/PRD.md`, `doc/FRONTEND_GUIDELINES.md`, `doc/BACKEND_STRUCTURE.md`, `doc/APP_FLOW.md`, and `doc/TEAM.md`:
+
+~~~markdown
+# <DOCUMENT_NAME>
+
+Status: Active
+Canonical For: <single owner responsibility>
+
+## 1. Purpose
+待确认
+
+## 2. Contract / Protocol
+待确认
+
+## 3. Boundaries
+待确认
+
+## 4. Update rule
+待确认
+~~~
+
+## `lessons.md`
+
+~~~markdown
+# lessons.md
+
+## YYYY-MM-DD - Short title
+
+Mistake:
+Cause:
+Correction:
+Future rule:
 ~~~

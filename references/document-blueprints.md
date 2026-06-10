@@ -1,169 +1,303 @@
 # Document Blueprints
 
-Generate the eight files below from user-confirmed answers. Use `待确认项` for unresolved assumptions. Cross-reference documents so each file plays a distinct role.
+Generate or refactor the canonical document set below from user-confirmed facts. Every file must state `Canonical For:` near the top. Use `待确认项` for unresolved assumptions. Do not copy a whole status, task list, run log, or contract into a non-owner document.
 
-## `PRD.md` - Algorithm Research Requirements
+## Standard Layout
 
-Purpose: define the research contract.
+```text
+CLAUDE.md
+PROGRESS.md
+TODO.md
+doc/IMPLEMENTATION_PLAN.md
+doc/RUN_REGISTRY.md
+doc/diagnostics/*.md
+doc/PRD.md
+doc/FRONTEND_GUIDELINES.md
+doc/BACKEND_STRUCTURE.md
+doc/APP_FLOW.md
+doc/TEAM.md
+lessons.md
+```
 
-Required sections:
+For smaller projects, omit documents only when their responsibility truly does not exist. Preserve the ownership model even when combining files temporarily.
 
-- `研究问题定义`: exact problem, motivation, target users, and task boundary.
-- `任务输入与输出`: input schema, output schema, valid examples, invalid examples.
-- `核心 Claim`: main claim, secondary claims, forbidden claims.
-- `Claim 到实验映射`: each claim mapped to required experiments and metrics.
-- `方法目标与边界`: what failure mode the method addresses, assumptions, dependencies.
-- `版本范围`: MVP, standard version, enhanced version.
-- `In Scope`: included tasks, datasets, baselines, experiments, artifacts.
-- `Out of Scope`: excluded tasks, claims, datasets, deployment settings.
-- `成功标准`: metric thresholds, artifact completeness, reproducibility gates.
-- `失败标准`: conditions that invalidate the claim or block progress.
-- `指标定义`: primary and secondary metrics with formulas or exact computation rules.
-- `风险与缓解`: data, method, compute, reproducibility, evaluation, leakage risks.
-- `Open Questions / 待确认项`: unresolved choices.
+## `CLAUDE.md` - Entry Point and Routing Rules
 
-## `APP_FLOW.md` - Algorithm and Experiment Flow
+Canonical for: AI operating rules, document map, read order, conflict priority, completion standard.
 
-Purpose: define how experiments move from data to artifacts.
+Update frequency: low.
 
-Required sections:
-
-- `Top-Level Pipeline`: full lifecycle from data ingestion to report generation.
-- `数据准备流程`: trigger, inputs, steps, outputs, success state, error state.
-- `数据清洗与划分流程`: split strategy, leakage checks, invalid data handling.
-- `Baseline 训练流程`: per-baseline config, training, checkpoint, outputs.
-- `核心算法训练流程`: proposed method stages and failure handling.
-- `推理流程`: inputs, model loading, batch behavior, outputs.
-- `评估流程`: metric computation, aggregation, artifacts.
-- `消融实验流程`: what each ablation removes or changes, expected artifact.
-- `鲁棒性实验流程`: stress conditions, perturbations, distribution shifts.
-- `结果聚合流程`: merge per-run artifacts into tables and figures.
-- `报告生成流程`: map artifacts to report sections.
-- `异常处理`: corrupted data, OOM, non-convergence, failed run, missing artifact.
-
-For each flow, include trigger, input, output, stage steps, success condition, error condition, and artifact path.
-
-## `TECH_STACK.md` - Technology Stack and Environment
-
-Purpose: make the environment reproducible.
+Must not own: project history, long roadmap, run logs, task details, experiment diagnostics.
 
 Required sections:
 
-- `Languages`: Python/Julia/C++/R versions.
-- `Training Framework`: PyTorch, JAX, TensorFlow, Lightning, or other framework and version.
-- `Model Libraries`: Transformers, Diffusers, TRL, domain libraries, candidate versions.
-- `Scientific Computing`: NumPy, SciPy, Pandas, Polars, scikit-learn, etc.
-- `Domain Tools`: RDKit, OpenMM, Qiskit, PyBaMM, QuTiP, NetworkX, or project-specific tools.
-- `Configuration`: Hydra, OmegaConf, YAML, CLI conventions.
-- `Experiment Tracking`: local JSONL, MLflow, W&B, TensorBoard, or disabled.
-- `Data Versioning`: DVC, git-lfs, checksums, manual manifest.
-- `Testing`: pytest and smoke-test commands.
-- `Hardware`: CPU/GPU/CUDA/driver/memory/storage expectations.
-- `Install Commands`: environment creation and package installation.
-- `Smoke Test`: commands that prove imports, GPU, data load, minimal train, minimal eval.
-- `Version Change Rules`: how dependency changes are proposed and recorded.
+- `Status` and `Canonical For`
+- `Purpose`: first entry point for AI work in the repo.
+- `Minimal doc map`: one-line owner map for live state, active queue, run ledger, roadmap, stable contracts, team, lessons.
+- `Read order`: usually `PROGRESS.md`, then `TODO.md`, then run/roadmap/contracts as needed.
+- `Conflict rule`: cite the priority table from `hard-rules.md` in project-local form.
+- `Documentation ownership`: update the document that owns the changed fact.
+- `Completion standard`: tests/artifacts plus required doc updates before claiming done.
+- `Forbidden actions`: no guessing, no stale TODO resurrection, no duplicate canonical state.
 
-## `FRONTEND_GUIDELINES.md` - Result Presentation and Reporting
+## `PROGRESS.md` - Live State and Session Bootstrap
 
-Purpose: prevent misleading, inconsistent, or unreproducible result presentation. This is not a web frontend guide unless the project truly has a UI.
+Canonical for: live project state, resume point, current blocker, trusted evidence summary, allowed next action.
 
-Required sections:
+Update frequency: high.
 
-- `主结果表`: columns, metric order, dataset order, method order, seed display.
-- `Baseline Comparison Table`: baseline names, fairness controls, metric display.
-- `Ablation Table`: one change per row, contribution isolated.
-- `Robustness Table`: stress condition, perturbation level, metric change.
-- `Dataset Statistics Table`: split sizes, label distribution, missing data, filters.
-- `Failure Case Table`: input id, failure type, model output, expected output, diagnosis.
-- `Metric Naming`: canonical names, units, directionality.
-- `Figure Rules`: when to use line, bar, box, scatter, heatmap, or calibration plot.
-- `Axes and Legends`: labels, units, scales, sorting, legend placement.
-- `Uncertainty`: error bars, confidence intervals, seed aggregation.
-- `Artifact Mapping`: which JSON/CSV/NPY/log files create each table or figure.
-- `Report Structure`: main text sections and appendix sections.
-- `Forbidden Displays`: decorative charts, inconsistent metric names, missing seeds, cherry-picked examples.
+Must not own: long history, complete run registry, long diagnostics, full roadmap, complete task queue.
 
-## `BACKEND_STRUCTURE.md` - Algorithm System Structure
-
-Purpose: define the reproducible algorithm system, not a web backend.
+Recommended size: 150-250 lines when possible.
 
 Required sections:
 
-- `Repository Layout`: directories and ownership.
-- `Data Directories`: `data/raw`, `data/interim`, `data/processed`, `data/splits`.
-- `Data Schema`: raw record, processed record, split manifest.
-- `Training Sample Schema`: fields consumed by model/trainer.
-- `Prediction Output Schema`: per-sample output fields and metadata.
-- `Evaluation Result Schema`: metrics, aggregation, run metadata.
-- `Artifact Schema`: checkpoints, predictions, metrics, plots, reports, logs.
-- `Model Modules`: model construction and forward/inference responsibilities.
-- `Dataset Loader`: parsing, validation, batching, transforms.
-- `Preprocessing`: cleaning, feature construction, split creation.
-- `Trainer`: loop, optimization, checkpoint, seed, failure handling.
-- `Loss / Reward / Oracle`: formulas, interfaces, caching if applicable.
-- `Evaluator`: metric computation and aggregation.
-- `Reporting`: table/figure generation from artifacts only.
-- `Config Groups`: model, data, train, eval, baseline, experiment, report, paths.
-- `Logging Rules`: JSONL fields, console logs, error logs.
-- `Checkpoint Rules`: naming, save frequency, best/latest, retention.
-- `Testing Structure`: unit, integration, smoke, regression.
-- `Dependency Boundaries`: modules that must not import each other.
+- `Status`, `Last Updated`, `Canonical For`
+- `0. Read-first rule`: every non-trivial session reads this first.
+- `1. Current phase`: current stage and short meaning.
+- `2. Current live status`: blocker, allowed next action, forbidden actions, stop-loss.
+- `3. Current artifacts / roots / outputs`: concise active paths and active root summary.
+- `4. Evidence trust summary`: formal, parser-backed, diagnostic, smoke-only, untrusted.
+- `5. Active next queue summary`: summary pointer to `TODO.md`, not a duplicate queue.
+- `6. Update protocol`: when this file must change.
 
-## `IMPLEMENTATION_PLAN.md` - Build and Experiment Plan
+## `TODO.md` - Active Queue
 
-Purpose: define execution order and gates.
+Canonical for: current active task queue, dependencies, ownership, blocked/unblocked state, acceptance gates.
+
+Update frequency: medium-high.
+
+Must not own: long project history, full run log, root registry, failure analysis, stable contracts.
 
 Required sections:
 
-- `Milestones`: numbered phases from project skeleton to full experiments.
-- `Task Breakdown`: each task has inputs, outputs, files touched, commands, acceptance criteria.
-- `Smoke Test Plan`: smallest commands that verify environment, data load, train, eval, report.
-- `MVP Experiment Plan`: minimal credible run proving pipeline connectivity.
-- `Standard Experiment Plan`: required baseline, core method, ablation, robustness experiments.
-- `Full Experiment Plan`: multi-seed or full-scale runs after gates pass.
-- `Baseline Order`: simplest baseline first, strongest baseline later.
-- `Ablation Order`: isolate claimed contribution before optional variants.
-- `Robustness Order`: cheapest stress tests before expensive ones.
-- `Result Generation Order`: metrics first, tables second, figures third, report last.
-- `Fallbacks`: what to do after OOM, non-convergence, bad data, failed baseline.
-- `No-Skip Gates`: tests or artifacts required before moving to the next milestone.
+- `Status` and `Canonical For`
+- `1. Operating rule`: how to claim tasks and update state.
+- `2. Current active queue`: table with ID, status, owner, scope, dependencies, acceptance, forbidden actions.
+- `3. Task-claiming minimum checks`: docs/tests/artifacts to inspect before starting.
+- `4. Hard stop conditions`: when to stop and ask or write diagnostics.
+- `5. Handoff template`: compact end-of-task handoff.
+- `6. Archive note`: where completed/old tasks go.
 
-Avoid vague tasks. Prefer concrete tasks like: implement `src/project/algorithms/foo.py`; input `ProcessedBatch`; output `PredictionBatch`; test `tests/test_foo.py`; run `python -m project.train experiment=foo_smoke`; artifact `artifacts/runs/foo_smoke/metrics.json`.
+## `doc/IMPLEMENTATION_PLAN.md` - Master Roadmap
 
-## `CLAUDE.md` - AI Operation Manual
+Canonical for: roadmap, phase history, accepted engineering record, exit criteria, stage-level blockers.
 
-Purpose: tell every AI session how to work in this project.
+Update frequency: medium.
+
+Must not own: current PID/path/log line, next shell command, detailed run history, active task queue.
 
 Required sections:
 
-- `Project Summary`: concise research goal and boundary.
-- `Must Read First`: ordered list of project docs and `progress.txt`.
-- `Non-Negotiable Rules`: no guessing, no code before docs/gates, no unverified claims.
-- `Algorithm Boundary`: what the method may and may not do.
-- `Tech Stack Summary`: versions and config rules.
-- `Naming Conventions`: experiment ids, config names, artifact names.
-- `Artifact Rules`: every conclusion must cite an artifact path.
-- `Baseline Rules`: allowed baselines and fairness controls.
-- `Testing Rules`: commands required before claiming completion.
-- `Reporting Rules`: table/figure conventions.
-- `Forbidden Actions`: hardcoding experiment settings, notebook-only reproduction, deleting artifacts, claiming smoke results as formal results.
-- `Session Start Checklist`: read docs, read progress, inspect git status, identify next gate.
-- `Session End Checklist`: update progress, list artifacts, record failures.
+- `Status` and `Canonical For`
+- `0. Master roadmap`: table with Stage, Goal, Entry, Exit, Artifacts, Boundary, Status.
+- `1. Current roadmap position`: stage-level explanation.
+- `2. Phase history`: accepted phase transitions and what they proved.
+- `3. Accepted gates`: gates passed and their meaning.
+- `4. Current high-level blockers`: only blockers that affect roadmap direction.
+- `5. Exit criteria`: how current stage ends.
+- `6. Stop-loss / fallback`: downgrade, scope reduction, or claim change rules.
+- `7. Archive index`: links to `RUN_REGISTRY.md` and diagnostics.
 
-## `progress.txt` - Progress Memory and Handoff
+## `doc/RUN_REGISTRY.md` - Factual Run Ledger
 
-Purpose: preserve cross-session state.
+Canonical for: experiment/root/smoke/parser/table/figure factual ledger and trust classification.
+
+Update frequency: after each run/result event.
+
+Must not own: long diagnosis, current next action, task queue, claim contract.
 
 Required sections:
 
-- `Current Status`: one-paragraph state of the project.
-- `Completed`: modules, docs, tests, experiments finished.
-- `In Progress`: active task and current blocker.
-- `Next Actions`: ordered next steps.
-- `Experiments Run`: id, mode, command, date, seed, artifact path, status.
-- `Trusted Results`: results that passed gates.
-- `Smoke Only Results`: results not eligible for formal claims.
-- `Failures`: failed runs, cause, mitigation, retry plan.
-- `Open Questions`: unresolved assumptions.
-- `Environment Notes`: machine, dependency, data, compute notes.
-- `Last Updated`: timestamp and author/session note.
+- `Status` and `Canonical For`
+- `1. Purpose`: fact ledger only, not analysis.
+- `2. Trust levels`: project-specific trust taxonomy.
+- `3. Root / run registry`: append-oriented table.
+- `4. Parser / aggregate artifacts`: table or pointers for generated formal artifacts.
+- `5. Update rule`: when a run starts, ends, fails, gets parsed, or becomes formal.
+
+Suggested registry columns:
+
+| Date | ID | Commit | Root/output | Scope | Methods | Classification | Trust | Parser eligible? | Failure/blocker | Report |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+Suggested trust levels:
+
+- `implementation_smoke`
+- `diagnostic_probe`
+- `frozen_non_promotable`
+- `complete_accounting_failed_no_parser`
+- `reviewer_accounting_pass_pending_parser`
+- `parser_produced_formal_result`
+- `paper_claim_audited`
+
+Adapt names to the project; keep meanings crisp.
+
+## `doc/diagnostics/*.md` - Long Failure Analysis
+
+Canonical for: failure analysis, reviewer accounting, process audit, complex evidence diagnosis.
+
+Update frequency: only when needed.
+
+Must not own: current status entry point, active task queue, run ledger table.
+
+Use diagnostics for:
+
+- Tier 2 semantic runtime blockers.
+- Tier 3 evidence/claim blockers.
+- Complex reviewer accounting failures.
+- Process audits or workflow failures.
+
+Avoid diagnostics for:
+
+- Metadata typos.
+- Stale paths.
+- Wrong commit hashes.
+- Stale readiness text.
+
+Recommended names:
+
+- `doc/diagnostics/<date>_<topic>_diagnosis.md`
+- `doc/diagnostics/<date>_reviewer_accounting.md`
+- `doc/diagnostics/<date>_process_audit.md`
+
+Required sections:
+
+- `Status` and `Canonical For`
+- `Summary`
+- `Observed facts`
+- `Root cause`
+- `Impact`
+- `Correction`
+- `Evidence / logs / artifacts`
+- `Follow-up doc updates`
+
+## `doc/PRD.md` - Product or Research Contract
+
+Canonical for: project goal, problem framing, core claims, scope, success metrics, narrative boundaries.
+
+Update frequency: low.
+
+Must not own: current root status, TODOs, logs, detailed run results, diagnostics.
+
+Required sections:
+
+- `Status` and `Canonical For`
+- `1. Project goal`
+- `2. Problem framing`
+- `3. Core claims`
+- `4. In scope`
+- `5. Out of scope`
+- `6. Success metrics`
+- `7. Experiment or validation families`
+- `8. Claim boundaries`
+- `9. Document boundary`
+
+For algorithm work, map every claim to an experiment family and evidence standard.
+
+## `doc/FRONTEND_GUIDELINES.md` - Interface, Result, or Math Contract
+
+Canonical for: user-facing behavior, result presentation, mathematical interface, state/action/objective/metric definitions. The exact meaning depends on project type.
+
+Update frequency: low.
+
+Must not own: progress, run failures, active tasks.
+
+For algorithm/research projects, required sections:
+
+- `1. Purpose`
+- `2. State representation`
+- `3. Conditioning interface`
+- `4. Action interface`
+- `5. Legality oracle`
+- `6. Objective`
+- `7. Evaluation metric interface`
+- `8. Reporting/table/figure contract`
+- `9. Document boundary`
+
+For product/frontend projects, use the same owner principle for UI states, actions, result displays, tables, figures, and user-facing copy rules.
+
+## `doc/BACKEND_STRUCTURE.md` - Runtime, Schema, and Evidence Contract
+
+Canonical for: data, schema, runtime, parser, evidence, accounting, artifact contracts, backend/module boundaries.
+
+Update frequency: low.
+
+Must not own: active task queue, current run status, historical run table.
+
+Required sections:
+
+- `Status` and `Canonical For`
+- `1. Contract ownership`
+- `2. Repository / module layout`
+- `3. Dataset / task contract`
+- `4. Runtime / replay contract`
+- `5. Formal accounting contract`
+- `6. Artifact schema`
+- `7. Parser / fail-closed rules`
+- `8. Environment and reliability constraints`
+- `9. Archive note`
+
+For non-research projects, replace dataset/replay/parser with API/storage/domain evidence contracts while preserving schema ownership.
+
+## `doc/APP_FLOW.md` - Runtime Flow
+
+Canonical for: system operating sequence, component interaction order, data/control flow, pipeline stage order.
+
+Update frequency: low.
+
+Must not own: current root, blocker, task queue, claim changes.
+
+Required sections:
+
+- `Status` and `Canonical For`
+- `1. Scope`
+- `2. Canonical end-to-end flow`
+- `3. Startup flow`
+- `4. Runtime / training / execution flow`
+- `5. Method or feature variant flow`
+- `6. Evidence / output flow`
+- `7. Failure and retry flow`
+- `8. Reader guide`
+
+## `doc/TEAM.md` - Multi-Agent Collaboration Protocol
+
+Canonical for: team roles, multi-agent workflow, concurrency, handoff, permissions, no-overlap rules.
+
+Update frequency: medium.
+
+Must not own: project state, root history, claims, math interface.
+
+Required sections:
+
+- `Status` and `Canonical For`
+- `1. Purpose`
+- `2. Roles`
+- `3. Communication rule`
+- `4. Concurrency tiers`
+- `5. No-overlap declaration`
+- `6. Leader protocol`
+- `7. Researcher / implementer protocol`
+- `8. Reviewer protocol`
+- `9. Documentation update ownership`
+- `10. Handoff templates`
+- `11. Completion standard`
+
+## `lessons.md` - Real Mistakes and Corrections
+
+Canonical for: real mistakes, causes, corrections, future prevention rules.
+
+Update frequency: low.
+
+Must not own: roadmap, task queue, experiment history, rule encyclopedia.
+
+Entry format:
+
+```markdown
+## YYYY-MM-DD - Short title
+
+Mistake:
+Cause:
+Correction:
+Future rule:
+```
