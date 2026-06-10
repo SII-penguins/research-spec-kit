@@ -46,18 +46,6 @@ Update the document that owns the changed fact.
 Do not claim completion until code/tests/artifacts are verified and owner docs are updated.
 ~~~
 
-## Optional `CLAUDE.md` Shim
-
-Create this only when the project needs Claude Code compatibility:
-
-~~~markdown
-# CLAUDE.md
-
-This repo's canonical agent entrypoint is `AGENTS.md`.
-
-Read `AGENTS.md` first. Do not duplicate routing rules, conflict priority, project status, task queues, or run history here.
-~~~
-
 ## `PROGRESS.md`
 
 ~~~markdown

@@ -110,7 +110,7 @@ Handoff required:
 
 Leader:
 
-- Reads `AGENTS.md`, `PROGRESS.md`, `TODO.md`, and relevant owner docs before non-trivial assignment. If only a thin `CLAUDE.md` shim is present in a Claude Code session, follow it to `AGENTS.md`.
+- Reads the project agent entrypoint (`AGENTS.md` by default), `PROGRESS.md`, `TODO.md`, and relevant owner docs before non-trivial assignment.
 - Defines context boundary, concurrency tier, active slots, allowed/forbidden files, verification expectations, and stop conditions.
 - Integrates handoffs and decides whether evidence supports the user-facing claim.
 - Updates canonical docs owned by changed facts.

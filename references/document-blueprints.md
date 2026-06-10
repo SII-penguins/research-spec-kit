@@ -21,7 +21,7 @@ lessons.md
 
 For smaller projects, omit documents only when their responsibility truly does not exist. Preserve the ownership model even when combining files temporarily.
 
-Codex-first projects should use `AGENTS.md` as the canonical agent entrypoint. If the repo also needs Claude Code compatibility, create a thin `CLAUDE.md` shim that points to `AGENTS.md`; do not duplicate the rules.
+Use one canonical agent entrypoint filename. Default to `AGENTS.md` for Codex-oriented projects. For Claude Code-only projects, name the same file `CLAUDE.md` instead and update references consistently; do not create duplicate entrypoint files.
 
 ## `AGENTS.md` - Entry Point and Routing Rules
 
@@ -41,15 +41,6 @@ Required sections:
 - `Documentation ownership`: update the document that owns the changed fact.
 - `Completion standard`: tests/artifacts plus required doc updates before claiming done.
 - `Forbidden actions`: no guessing, no stale TODO resurrection, no duplicate canonical state.
-
-Optional Claude Code compatibility shim:
-
-```markdown
-# CLAUDE.md
-
-This repo's canonical agent entrypoint is `AGENTS.md`.
-Read `AGENTS.md` first and do not duplicate its routing rules here.
-```
 
 ## `PROGRESS.md` - Live State and Session Bootstrap
 

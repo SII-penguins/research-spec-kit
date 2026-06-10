@@ -8,7 +8,7 @@ Apply these rules before drafting docs, writing code, running experiments, revie
 - Other documents may link or summarize, but must not copy the full state, task queue, run history, diagnostic analysis, or contract.
 - If two docs conflict, do not average them. Use the conflict priority below.
 - If a fact has no owner, assign one before creating or updating it.
-- For Codex-first projects, `AGENTS.md` is the canonical agent entrypoint. `CLAUDE.md`, if present, must be a thin compatibility shim pointing to `AGENTS.md`.
+- Use one canonical agent entrypoint. Default to `AGENTS.md`; for Claude Code-only projects, rename that same entrypoint to `CLAUDE.md` and update references consistently.
 
 ## Conflict Priority
 
@@ -23,8 +23,7 @@ Use this priority whenever documents disagree:
 - `doc/BACKEND_STRUCTURE.md` wins for schema/evidence/parser/accounting/runtime contracts.
 - `doc/APP_FLOW.md` wins for runtime sequence.
 - `doc/TEAM.md` wins for agent coordination.
-- `AGENTS.md` wins for document reading order and AI behavior rules.
-- `CLAUDE.md` must not override `AGENTS.md`; it only exists for Claude Code compatibility when needed.
+- The chosen agent entrypoint (`AGENTS.md` by default) wins for document reading order and AI behavior rules.
 - `lessons.md` wins only for recorded mistakes and remediation.
 
 ## Update Protocol
@@ -53,7 +52,7 @@ Update the owner document when the fact changes:
 
 ## Keep Docs Narrow
 
-- `AGENTS.md` is an entrypoint, not a project encyclopedia.
+- The agent entrypoint is an entrypoint, not a project encyclopedia.
 - `PROGRESS.md` is live state, not a historical log.
 - `TODO.md` is the active queue, not progress history.
 - `IMPLEMENTATION_PLAN.md` is roadmap, not today's command list.
